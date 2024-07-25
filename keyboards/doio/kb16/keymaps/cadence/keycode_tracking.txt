@@ -1,0 +1,19 @@
+F13 - F24 = Rotary Presses L0-3
+SF13 - SF24 = Rotary CCW L0-3
+CF13 - CF24 = Rotary CW L0-3
+
+AF13 - AF24 = Buttons L4
+GF13 - GF24 = Buttons L5
+
+CSF13 - CSF24 = Buttons L2
+CAF13 - CAF24 = Buttons L3
+
+CGF13 - CGF24 = Rotary Presses L4-7
+SGF13 - SGF24 = Rotary CCW L4-7
+AGF13 - AGF24 = Rotary CW L4-7
+
+SAF13 - SAF24 = Buttons L6
+
+CSAF13 - CSAF24 = Buttons L0 (if needed)
+CSGF13 - CSGF24 = Buttons L1 (if needed)
+CAGF13 - CAGF24 = Buttons L7 (if needed)

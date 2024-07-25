@@ -19,3 +19,11 @@
 
 /* Use the custom font */
 #define OLED_FONT_H "./lib/glcdfont.c"
+
+/* Tap Dance configurations */
+// #define TAPPING_TERM 175
+// #define TAPPING_TERM_PER_KEY
+
+/* Increase dynamic layer count from 4 to 8 */
+#define DYNAMIC_KEYMAP_LAYER_COUNT 8
+
