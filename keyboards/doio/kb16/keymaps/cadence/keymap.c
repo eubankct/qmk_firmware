@@ -17,6 +17,9 @@
 
 #include QMK_KEYBOARD_H
 
+// Use for debugging with QMK Console
+// #include "print.h"
+
 // OLED animation
 #include "lib/layer_status/layer_status.h"
 
@@ -44,30 +47,6 @@ enum {
     TD_L2_L6,
     TD_L3_L7,
     // PCB Layers
-    /* TD_L01_TGL,
-    TD_L01_ISO,
-    TD_L02_TGL,
-    TD_L02_ISO,
-    TD_L03_TGL,
-    TD_L03_ISO,
-    TD_L04_TGL,
-    TD_L04_ISO,
-    TD_L05_TGL,
-    TD_L05_ISO,
-    TD_L06_TGL,
-    TD_L06_ISO,
-    TD_L07_TGL,
-    TD_L07_ISO,
-    TD_L08_TGL,
-    TD_L08_ISO,
-    TD_L09_TGL,
-    TD_L09_ISO,
-    TD_L10_TGL,
-    TD_L10_ISO,
-    TD_LUP_TGL,
-    TD_LUP_ISO,
-    TD_LDOWN_TGL,
-    TD_LDOWN_ISO, */
     TD_L01_VIZ,
     TD_L02_VIZ,
     TD_L03_VIZ,
@@ -102,134 +81,149 @@ enum {
     TD_RGB_31,
 };
 
-// Custom keycodes for macros
-/* enum macro_keycodes {
-    L_01_TGL = SAFE_RANGE,
-    L_01_ISO,
-    L_02_TGL,
-    L_02_ISO,
-    L_03_TGL,
-    L_03_ISO,
-    L_04_TGL,
-    L_04_ISO,
-    L_05_TGL,
-    L_05_ISO,
-    L_06_TGL,
-    L_06_ISO,
-    L_07_TGL,
-    L_07_ISO,
-    L_08_TGL,
-    L_08_ISO,
-    L_09_TGL,
-    L_09_ISO,
-    L_10_TGL,
-    L_10_ISO,
-    L_UP_TGL,
-    L_UP_ISO,
-    L_DOWN_TGL,
-    L_DOWN_ISO,
-}; */
+// Function used by Tap Dance Keyboard Layer keys
+void keyboard_layer_change(tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        switch (TAP_DANCE_KEYCODE(state)) {
+            case TD(TD_L0_L4):
+                // when keycode TD_L0_L4 is pressed once, go to keyboard layer 0
+                layer_move(_VISIBILITY);
+                break;
+            case TD(TD_L1_L5):
+                // when keycode TD_L0_L4 is pressed once, go to keyboard layer 1
+                layer_move(_MODE_SNAP);
+                break;
+            case TD(TD_L2_L6):
+                // when keycode TD_L0_L4 is pressed once, go to keyboard layer 2
+                layer_move(_FIND1);
+                break;
+            case TD(TD_L3_L7):
+                // when keycode TD_L0_L4 is pressed once, go to keyboard layer 3
+                layer_move(_FIND2);
+                break;
+        }
+    } else if (state->count == 2) {
+        switch (TAP_DANCE_KEYCODE(state)) {
+            case TD(TD_L0_L4):
+                // when keycode TD_L0_L4 is pressed twice, go to keyboard layer 4
+                layer_move(_FOUR);
+                break;
+            case TD(TD_L1_L5):
+                // when keycode TD_L0_L4 is pressed twice, go to keyboard layer 5
+                layer_move(_FIVE);
+                break;
+            case TD(TD_L2_L6):
+                // when keycode TD_L0_L4 is pressed twice, go to keyboard layer 6
+                layer_move(_SIX);
+                break;
+            case TD(TD_L3_L7):
+                // when keycode TD_L0_L4 is pressed twice, go to keyboard layer 7
+                layer_move(_RGB);
+                break;
+        }
+    }
+};
 
 // Function used by Tap Dance Layer keys
 void layer_toggle_isolate(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         switch (TAP_DANCE_KEYCODE(state)) {
-            case TD_L01_VIZ:
+            case TD(TD_L01_VIZ):
                 // when keycode TD_L01_VIZ is pressed once, toggle visibility
                 SEND_STRING("l01t");
                 break;
-            case TD_L02_VIZ:
+            case TD(TD_L02_VIZ):
                 // when keycode TD_L02_VIZ is pressed once, toggle visibility
                 SEND_STRING("l02t");
                 break;
-            case TD_L03_VIZ:
+            case TD(TD_L03_VIZ):
                 // when keycode TD_L03_VIZ is pressed once, toggle visibility
                 SEND_STRING("l03t");
                 break;
-            case TD_L04_VIZ:
+            case TD(TD_L04_VIZ):
                 // when keycode TD_L04_VIZ is pressed once, toggle visibility
                 SEND_STRING("l04t");
                 break;
-            case TD_L05_VIZ:
+            case TD(TD_L05_VIZ):
                 // when keycode TD_L05_VIZ is pressed once, toggle visibility
                 SEND_STRING("l05t");
                 break;
-            case TD_L06_VIZ:
+            case TD(TD_L06_VIZ):
                 // when keycode TD_L06_VIZ is pressed once, toggle visibility
                 SEND_STRING("l06t");
                 break;
-            case TD_L07_VIZ:
+            case TD(TD_L07_VIZ):
                 // when keycode TD_L07_VIZ is pressed once, toggle visibility
                 SEND_STRING("l07t");
                 break;
-            case TD_L08_VIZ:
+            case TD(TD_L08_VIZ):
                 // when keycode TD_L08_VIZ is pressed once, toggle visibility
                 SEND_STRING("l08t");
                 break;
-            case TD_L09_VIZ:
+            case TD(TD_L09_VIZ):
                 // when keycode TD_L09_VIZ is pressed once, toggle visibility
                 SEND_STRING("l09t");
                 break;
-            case TD_L10_VIZ:
+            case TD(TD_L10_VIZ):
                 // when keycode TD_L10_VIZ is pressed once, toggle visibility
                 SEND_STRING("l10t");
                 break;
-            case TD_LUP_VIZ:
+            case TD(TD_LUP_VIZ):
                 // when keycode TD_LUP_VIZ is pressed once, toggle visibility
                 SEND_STRING("lupt");
                 break;
-            case TD_LDOWN_VIZ:
+            case TD(TD_LDOWN_VIZ):
                 // when keycode TD_LDOWN_VIZ is pressed once, toggle visibility
                 SEND_STRING("ldnt");
                 break;
         }
     } else if (state->count == 2) {
         switch (TAP_DANCE_KEYCODE(state)) {
-            case TD_L01_VIZ:
+            case TD(TD_L01_VIZ):
                 // when keycode TD_L01_VIZ is pressed once, toggle isolation
                 SEND_STRING("l01i");
                 break;
-            case TD_L02_VIZ:
+            case TD(TD_L02_VIZ):
                 // when keycode TD_L02_VIZ is pressed once, toggle isolation
                 SEND_STRING("l02i");
                 break;
-            case TD_L03_VIZ:
+            case TD(TD_L03_VIZ):
                 // when keycode TD_L03_VIZ is pressed once, toggle isolation
                 SEND_STRING("l03i");
                 break;
-            case TD_L04_VIZ:
+            case TD(TD_L04_VIZ):
                 // when keycode TD_L04_VIZ is pressed once, toggle isolation
                 SEND_STRING("l04i");
                 break;
-            case TD_L05_VIZ:
+            case TD(TD_L05_VIZ):
                 // when keycode TD_L05_VIZ is pressed once, toggle isolation
                 SEND_STRING("l05i");
                 break;
-            case TD_L06_VIZ:
+            case TD(TD_L06_VIZ):
                 // when keycode TD_L06_VIZ is pressed once, toggle isolation
                 SEND_STRING("l06i");
                 break;
-            case TD_L07_VIZ:
+            case TD(TD_L07_VIZ):
                 // when keycode TD_L07_VIZ is pressed once, toggle isolation
                 SEND_STRING("l07i");
                 break;
-            case TD_L08_VIZ:
+            case TD(TD_L08_VIZ):
                 // when keycode TD_L08_VIZ is pressed once, toggle isolation
                 SEND_STRING("l08i");
                 break;
-            case TD_L09_VIZ:
+            case TD(TD_L09_VIZ):
                 // when keycode TD_L09_VIZ is pressed once, toggle isolation
                 SEND_STRING("l09i");
                 break;
-            case TD_L10_VIZ:
+            case TD(TD_L10_VIZ):
                 // when keycode TD_L10_VIZ is pressed once, toggle isolation
                 SEND_STRING("l10i");
                 break;
-            case TD_LUP_VIZ:
+            case TD(TD_LUP_VIZ):
                 // when keycode TD_LUP_VIZ is pressed once, toggle isolation
                 SEND_STRING("lupi");
                 break;
-            case TD_LDOWN_VIZ:
+            case TD(TD_LDOWN_VIZ):
                 // when keycode TD_LDOWN_VIZ is pressed once, toggle isolation
                 SEND_STRING("ldni");
                 break;
@@ -241,70 +235,70 @@ void layer_toggle_isolate(tap_dance_state_t *state, void *user_data) {
 void snap_persistent(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         switch (TAP_DANCE_KEYCODE(state)) {
-            case TD_SNAP_SHAPE_CENTER:
+            case TD(TD_SNAP_SHAPE_CENTER):
                 // when keycode TD_SNAP_SHAPE_CENTER is pressed once, snap to shape center this time
                 SEND_STRING("snap_shape_center\n");
                 break;
-            case TD_SNAP_ARC_CENTER:
+            case TD(TD_SNAP_ARC_CENTER):
                 // when keycode TD_SNAP_ARC_CENTER is pressed once, snap to arc/circle center this time
                 SEND_STRING("snap_arc_circle_center\n");
                 break;
-            case TD_SNAP_SYMBOL_ORIGIN:
+            case TD(TD_SNAP_SYMBOL_ORIGIN):
                 // when keycode TD_SNAP_SYMBOL_ORIGIN is pressed once, snap to symbol origin this time
                 SEND_STRING("snap_symbol_origin\n");
                 break;
-            case TD_SNAP_GRID_POINT:
+            case TD(TD_SNAP_GRID_POINT):
                 // when keycode TD_SNAP_GRID_POINT is pressed once, snap to grid point this time
                 SEND_STRING("snap_grid_point\n");
                 break;
-            case TD_SNAP_PIN:
+            case TD(TD_SNAP_PIN):
                 // when keycode TD_SNAP_PIN is pressed once, snap to pin this time
                 SEND_STRING("snap_pin\n");
                 break;
-            case TD_SNAP_FINGER:
+            case TD(TD_SNAP_FINGER):
                 // when keycode TD_SNAP_FINGER is pressed once, snap to finger this time
                 SEND_STRING("snap_finger\n");
                 break;
-            case TD_SNAP_VIA:
+            case TD(TD_SNAP_VIA):
                 // when keycode TD_SNAP_VIA is pressed once, snap to via this time
                 SEND_STRING("snap_via\n");
                 break;
-            case TD_SNAP_FIGURE:
+            case TD(TD_SNAP_FIGURE):
                 // when keycode TD_SNAP_FIGURE is pressed once, snap to figure this time
                 SEND_STRING("snap_figure\n");
                 break;
         }
     } else if (state->count == 2) {
         switch (TAP_DANCE_KEYCODE(state)) {
-            case TD_SNAP_SHAPE_CENTER:
+            case TD(TD_SNAP_SHAPE_CENTER):
                 // when keycode TD_SNAP_SHAPE_CENTER is pressed twice, set persistent snap to shape center
                 SEND_STRING("persistent_snap_shape_center\n");
                 break;
-            case TD_SNAP_ARC_CENTER:
+            case TD(TD_SNAP_ARC_CENTER):
                 // when keycode TD_SNAP_ARC_CENTER is pressed twice, set persistent snap to arc/circle center
                 SEND_STRING("persistent_snap_arc_circle_center\n");
                 break;
-            case TD_SNAP_SYMBOL_ORIGIN:
+            case TD(TD_SNAP_SYMBOL_ORIGIN):
                 // when keycode TD_SNAP_SYMBOL_ORIGIN is pressed twice, set persistent snap to symbol origin
                 SEND_STRING("persistent_snap_symbol_origin\n");
                 break;
-            case TD_SNAP_GRID_POINT:
+            case TD(TD_SNAP_GRID_POINT):
                 // when keycode TD_SNAP_GRID_POINT is pressed twice, set persistent snap to grid point
                 SEND_STRING("persistent_snap_grid_point\n");
                 break;
-            case TD_SNAP_PIN:
+            case TD(TD_SNAP_PIN):
                 // when keycode TD_SNAP_PIN is pressed twice, set persistent snap to pin
                 SEND_STRING("persistent_snap_pin\n");
                 break;
-            case TD_SNAP_FINGER:
+            case TD(TD_SNAP_FINGER):
                 // when keycode TD_SNAP_FINGER is pressed twice, set persistent snap to finger
                 SEND_STRING("persistent_snap_finger\n");
                 break;
-            case TD_SNAP_VIA:
+            case TD(TD_SNAP_VIA):
                 // when keycode TD_SNAP_VIA is pressed twice, set persistent snap to via
                 SEND_STRING("persistent_snap_via\n");
                 break;
-            case TD_SNAP_FIGURE:
+            case TD(TD_SNAP_FIGURE):
                 // when keycode TD_SNAP_FIGURE is pressed twice, set persistent snap to figure
                 SEND_STRING("persistent_snap_figure\n");
                 break;
@@ -316,121 +310,121 @@ void snap_persistent(tap_dance_state_t *state, void *user_data) {
 void rgb_animation_select(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         switch (TAP_DANCE_KEYCODE(state)) {
-            case TD_RGB_10:
+            case TD(TD_RGB_10):
                 // when keycode TD_RGB_10 is pressed once, activate alphas_mods RGB animation
                 rgb_matrix_mode(RGB_MATRIX_ALPHAS_MODS);
                 break;
-            case TD_RGB_11:
+            case TD(TD_RGB_11):
                 // when keycode TD_RGB_11 is pressed once, activate gradient_up_down RGB animation
                 rgb_matrix_mode(RGB_MATRIX_GRADIENT_UP_DOWN);
                 break;
-            case TD_RGB_12:
+            case TD(TD_RGB_12):
                 // when keycode TD_RGB_12 is pressed once, activate breathing RGB animation
                 rgb_matrix_mode(RGB_MATRIX_BREATHING);
                 break;
-            case TD_RGB_13:
+            case TD(TD_RGB_13):
                 // when keycode TD_RGB_13 is pressed once, activate band_sat RGB animation
                 rgb_matrix_mode(RGB_MATRIX_BAND_SAT);
                 break;
-            case TD_RGB_20:
+            case TD(TD_RGB_20):
                 // when keycode TD_RGB_20 is pressed once, activate band_val RGB animation
                 rgb_matrix_mode(RGB_MATRIX_BAND_VAL);
                 break;
-            case TD_RGB_21:
+            case TD(TD_RGB_21):
                 // when keycode TD_RGB_21 is pressed once, activate band_pinwheel_sat RGB animation
                 rgb_matrix_mode(RGB_MATRIX_BAND_PINWHEEL_SAT);
                 break;
-            case TD_RGB_22:
+            case TD(TD_RGB_22):
                 // when keycode TD_RGB_22 is pressed once, activate band_pinwheel_val RGB animation
                 rgb_matrix_mode(RGB_MATRIX_BAND_PINWHEEL_VAL);
                 break;
-            case TD_RGB_23:
+            case TD(TD_RGB_23):
                 // when keycode TD_RGB_23 is pressed once, activate cycle_all RGB animation
                 rgb_matrix_mode(RGB_MATRIX_CYCLE_ALL);
                 break;
-            case TD_RGB_30:
+            case TD(TD_RGB_30):
                 // when keycode TD_RGB_30 is pressed once, activate cycle_up_down RGB animation
                 rgb_matrix_mode(RGB_MATRIX_CYCLE_UP_DOWN);
                 break;
-            case TD_RGB_31:
+            case TD(TD_RGB_31):
                 // when keycode TD_RGB_31 is pressed once, activate cycle_out_in RGB animation
                 rgb_matrix_mode(RGB_MATRIX_CYCLE_OUT_IN);
                 break;
         }
     } else if (state->count == 2) {
         switch (TAP_DANCE_KEYCODE(state)) {
-            case TD_RGB_10:
+            case TD(TD_RGB_10):
                 // when keycode TD_RGB_10 is pressed twice, activate cycle_pinwheel RGB animation
                 rgb_matrix_mode(RGB_MATRIX_CYCLE_PINWHEEL);
                 break;
-            case TD_RGB_11:
+            case TD(TD_RGB_11):
                 // when keycode TD_RGB_11 is pressed twice, activate dual_beacon RGB animation
                 rgb_matrix_mode(RGB_MATRIX_DUAL_BEACON);
                 break;
-            case TD_RGB_12:
+            case TD(TD_RGB_12):
                 // when keycode TD_RGB_12 is pressed twice, activate rainbow_pinwheels RGB animation
                 rgb_matrix_mode(RGB_MATRIX_RAINBOW_PINWHEELS);
                 break;
-            case TD_RGB_13:
+            case TD(TD_RGB_13):
                 // when keycode TD_RGB_13 is pressed twice, activate raindrops RGB animation
                 rgb_matrix_mode(RGB_MATRIX_RAINDROPS);
                 break;
-            case TD_RGB_20:
+            case TD(TD_RGB_20):
                 // when keycode TD_RGB_20 is pressed twice, activate jellybean_raindrops RGB animation
                 rgb_matrix_mode(RGB_MATRIX_JELLYBEAN_RAINDROPS);
                 break;
-            case TD_RGB_21:
+            case TD(TD_RGB_21):
                 // when keycode TD_RGB_21 is pressed twice, activate hue_breathing RGB animation
                 rgb_matrix_mode(RGB_MATRIX_HUE_BREATHING);
                 break;
-            case TD_RGB_22:
+            case TD(TD_RGB_22):
                 // when keycode TD_RGB_22 is pressed twice, activate hue_pendulum RGB animation
                 rgb_matrix_mode(RGB_MATRIX_HUE_PENDULUM);
                 break;
-            case TD_RGB_23:
+            case TD(TD_RGB_23):
                 // when keycode TD_RGB_23 is pressed twice, activate hue_wave RGB animation
                 rgb_matrix_mode(RGB_MATRIX_HUE_WAVE);
                 break;
-            case TD_RGB_30:
+            case TD(TD_RGB_30):
                 // when keycode TD_RGB_30 is pressed twice, activate pixel_fractal RGB animation
                 rgb_matrix_mode(RGB_MATRIX_PIXEL_FRACTAL);
                 break;
-            case TD_RGB_31:
+            case TD(TD_RGB_31):
                 // when keycode TD_RGB_31 is pressed twice, activate pixel_flow RGB animation
                 rgb_matrix_mode(RGB_MATRIX_PIXEL_FLOW);
                 break;
         }
     } else if (state->count == 3) {
         switch (TAP_DANCE_KEYCODE(state)) {
-            case TD_RGB_10:
+            case TD(TD_RGB_10):
                 // when keycode TD_RGB_10 is pressed thrice, activate pixel_rain RGB animation
                 rgb_matrix_mode(RGB_MATRIX_PIXEL_RAIN);
                 break;
-            case TD_RGB_11:
+            case TD(TD_RGB_11):
                 // when keycode TD_RGB_11 is pressed thrice, activate solid_reactive_simple RGB animation
                 rgb_matrix_mode(RGB_MATRIX_SOLID_REACTIVE_SIMPLE);
                 break;
-            case TD_RGB_12:
+            case TD(TD_RGB_12):
                 // when keycode TD_RGB_12 is pressed thrice, activate solid_reactive RGB animation
                 rgb_matrix_mode(RGB_MATRIX_SOLID_REACTIVE);
                 break;
-            case TD_RGB_13:
+            case TD(TD_RGB_13):
                 // when keycode TD_RGB_13 is pressed thrice, activate solid_reactive_multiwide RGB animation
                 rgb_matrix_mode(RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE);
                 break;
-            case TD_RGB_20:
+            case TD(TD_RGB_20):
                 // when keycode TD_RGB_20 is pressed thrice, activate solid_reactive_multicross RGB animation
                 rgb_matrix_mode(RGB_MATRIX_SOLID_REACTIVE_MULTICROSS);
                 break;
-            case TD_RGB_21:
+            case TD(TD_RGB_21):
                 // when keycode TD_RGB_21 is pressed thrice, activate solid_reactive_multinexus RGB animation
                 rgb_matrix_mode(RGB_MATRIX_SOLID_REACTIVE_MULTINEXUS);
                 break;
-            case TD_RGB_22:
+            case TD(TD_RGB_22):
                 // when keycode TD_RGB_22 is pressed thrice, activate multisplash RGB animation
                 rgb_matrix_mode(RGB_MATRIX_MULTISPLASH);
                 break;
-            case TD_RGB_23:
+            case TD(TD_RGB_23):
                 // when keycode TD_RGB_23 is pressed thrice, activate solid_multisplash RGB animation
                 rgb_matrix_mode(RGB_MATRIX_SOLID_MULTISPLASH);
                 break;
@@ -441,23 +435,11 @@ void rgb_animation_select(tap_dance_state_t *state, void *user_data) {
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
     // Keyboard layers
-    [TD_L0_L4] = ACTION_TAP_DANCE_DOUBLE(TO(_VISIBILITY), TO(_VISIBILITY)),
-    [TD_L1_L5] = ACTION_TAP_DANCE_DOUBLE(TO(_MODE_SNAP), TO(_MODE_SNAP)),
-    [TD_L2_L6] = ACTION_TAP_DANCE_DOUBLE(TO(_FIND1), TO(_FIND1)),
-    [TD_L3_L7] = ACTION_TAP_DANCE_DOUBLE(TO(_FIND2), TO(_FIND2)),
+    [TD_L0_L4] = ACTION_TAP_DANCE_FN(keyboard_layer_change),
+    [TD_L1_L5] = ACTION_TAP_DANCE_FN(keyboard_layer_change),
+    [TD_L2_L6] = ACTION_TAP_DANCE_FN(keyboard_layer_change),
+    [TD_L3_L7] = ACTION_TAP_DANCE_FN(keyboard_layer_change),
     // PCB Layers
-    /* [TD_L01_TI] = ACTION_TAP_DANCE_DOUBLE(L_01_TGL, L_01_ISO),
-    [TD_L02_TI] = ACTION_TAP_DANCE_DOUBLE(L_02_TGL, L_02_ISO),
-    [TD_L03_TI] = ACTION_TAP_DANCE_DOUBLE(L_03_TGL, L_03_ISO),
-    [TD_L04_TI] = ACTION_TAP_DANCE_DOUBLE(L_04_TGL, L_04_ISO),
-    [TD_L05_TI] = ACTION_TAP_DANCE_DOUBLE(L_05_TGL, L_05_ISO),
-    [TD_L06_TI] = ACTION_TAP_DANCE_DOUBLE(L_06_TGL, L_06_ISO),
-    [TD_L07_TI] = ACTION_TAP_DANCE_DOUBLE(L_07_TGL, L_07_ISO),
-    [TD_L08_TI] = ACTION_TAP_DANCE_DOUBLE(L_08_TGL, L_08_ISO),
-    [TD_L09_TI] = ACTION_TAP_DANCE_DOUBLE(L_09_TGL, L_09_ISO),
-    [TD_L10_TI] = ACTION_TAP_DANCE_DOUBLE(L_10_TGL, L_10_ISO),
-    [TD_LUP_TI] = ACTION_TAP_DANCE_DOUBLE(L_UP_TGL, L_UP_ISO),
-    [TD_LDOWN_TI] = ACTION_TAP_DANCE_DOUBLE(L_DOWN_TGL, L_DOWN_ISO), */
     [TD_L01_VIZ] = ACTION_TAP_DANCE_FN(layer_toggle_isolate),
     [TD_L02_VIZ] = ACTION_TAP_DANCE_FN(layer_toggle_isolate),
     [TD_L03_VIZ] = ACTION_TAP_DANCE_FN(layer_toggle_isolate),
@@ -491,227 +473,6 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_RGB_30] = ACTION_TAP_DANCE_FN(rgb_animation_select),
     [TD_RGB_31] = ACTION_TAP_DANCE_FN(rgb_animation_select),
 };
-
-/* bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        // Layer 1 (Top)
-        case L_01_TGL:
-            if (record->event.pressed) {
-                // when keycode L_01_TGL is pressed
-                SEND_STRING("l01t");
-            } else {
-                // when keycode L_01_TGL is released
-            }
-            break;
-        case L_01_ISO:
-            if (record->event.pressed) {
-                // when keycode L_01_ISO is pressed
-                SEND_STRING("l01i");
-            } else {
-                // when keycode L_01_ISO is released
-            }
-            break;
-        
-        // Layer 2
-        case L_02_TGL:
-            if (record->event.pressed) {
-                // when keycode L_02_TGL is pressed
-                SEND_STRING("l02t");
-            } else {
-                // when keycode L_02_TGL is released
-            }
-            break;
-        case L_02_ISO:
-            if (record->event.pressed) {
-                // when keycode L_02_ISO is pressed
-                SEND_STRING("l02i");
-            } else {
-                // when keycode L_02_ISO is released
-            }
-            break;
-        
-        // Layer 3
-        case L_03_TGL:
-            if (record->event.pressed) {
-                // when keycode L_03_TGL is pressed
-                SEND_STRING("l03t");
-            } else {
-                // when keycode L_03_TGL is released
-            }
-            break;
-        case L_03_ISO:
-            if (record->event.pressed) {
-                // when keycode L_03_ISO is pressed
-                SEND_STRING("l03i");
-            } else {
-                // when keycode L_03_ISO is released
-            }
-            break;
-        
-        // Layer 4
-        case L_04_TGL:
-            if (record->event.pressed) {
-                // when keycode L_04_TGL is pressed
-                SEND_STRING("l04t");
-            } else {
-                // when keycode L_04_TGL is released
-            }
-            break;
-        case L_04_ISO:
-            if (record->event.pressed) {
-                // when keycode L_04_ISO is pressed
-                SEND_STRING("l04i");
-            } else {
-                // when keycode L_04_ISO is released
-            }
-            break;
-        
-        // Layer 5
-        case L_05_TGL:
-            if (record->event.pressed) {
-                // when keycode L_05_TGL is pressed
-                SEND_STRING("l05t");
-            } else {
-                // when keycode L_05_TGL is released
-            }
-            break;
-        case L_05_ISO:
-            if (record->event.pressed) {
-                // when keycode L_05_ISO is pressed
-                SEND_STRING("l05i");
-            } else {
-                // when keycode L_05_ISO is released
-            }
-            break;
-        
-        // Layer 6
-        case L_06_TGL:
-            if (record->event.pressed) {
-                // when keycode L_06_TGL is pressed
-                SEND_STRING("l06t");
-            } else {
-                // when keycode L_06_TGL is released
-            }
-            break;
-        case L_06_ISO:
-            if (record->event.pressed) {
-                // when keycode L_06_ISO is pressed
-                SEND_STRING("l06i");
-            } else {
-                // when keycode L_06_ISO is released
-            }
-            break;
-        
-        // Layer 7
-        case L_07_TGL:
-            if (record->event.pressed) {
-                // when keycode L_07_TGL is pressed
-                SEND_STRING("l07t");
-            } else {
-                // when keycode L_07_TGL is released
-            }
-            break;
-        case L_07_ISO:
-            if (record->event.pressed) {
-                // when keycode L_07_ISO is pressed
-                SEND_STRING("l07i");
-            } else {
-                // when keycode L_07_ISO is released
-            }
-            break;
-        
-        // Layer 8
-        case L_08_TGL:
-            if (record->event.pressed) {
-                // when keycode L_08_TGL is pressed
-                SEND_STRING("l08t");
-            } else {
-                // when keycode L_08_TGL is released
-            }
-            break;
-        case L_08_ISO:
-            if (record->event.pressed) {
-                // when keycode L_08_ISO is pressed
-                SEND_STRING("l08i");
-            } else {
-                // when keycode L_08_ISO is released
-            }
-            break;
-        
-        // Layer 9
-        case L_09_TGL:
-            if (record->event.pressed) {
-                // when keycode L_09_TGL is pressed
-                SEND_STRING("l09t");
-            } else {
-                // when keycode L_09_TGL is released
-            }
-            break;
-        case L_09_ISO:
-            if (record->event.pressed) {
-                // when keycode L_09_ISO is pressed
-                SEND_STRING("l09i");
-            } else {
-                // when keycode L_09_ISO is released
-            }
-            break;
-        
-        // Layer 10 (Bottom)
-        case L_10_TGL:
-            if (record->event.pressed) {
-                // when keycode L_10_TGL is pressed
-                SEND_STRING("l10t");
-            } else {
-                // when keycode L_10_TGL is released
-            }
-            break;
-        case L_10_ISO:
-            if (record->event.pressed) {
-                // when keycode L_10_ISO is pressed
-                SEND_STRING("l10i");
-            } else {
-                // when keycode L_10_ISO is released
-            }
-            break;
-
-        // Layer Up
-        case L_UP_TGL:
-            if (record->event.pressed) {
-                // when keycode L_UP_TGL is pressed
-                SEND_STRING("lupt");
-            } else {
-                // when keycode L_UP_TGL is released
-            }
-            break;
-        case L_UP_ISO:
-            if (record->event.pressed) {
-                // when keycode L_UP_ISO is pressed
-                SEND_STRING("lupi");
-            } else {
-                // when keycode L_UP_ISO is released
-            }
-            break;
-
-        // Layer Down
-        case L_DOWN_TGL:
-            if (record->event.pressed) {
-                // when keycode L_DOWN_TGL is pressed
-                SEND_STRING("ldnt");
-            } else {
-                // when keycode L_DOWN_TGL is released
-            }
-            break;
-        case L_DOWN_ISO:
-            if (record->event.pressed) {
-                // when keycode L_DOWN_ISO is pressed
-                SEND_STRING("ldni");
-            } else {
-                // when keycode L_DOWN_ISO is released
-            }
-            break;
-    }
-    return true;
-}; */
 
 // enum layer_keycodes { };
 

@@ -17,3 +17,6 @@ SEND_STRING_ENABLE = yes
 
 # EEPROM Driver (vendor by default; included for completeness)
 EEPROM_DRIVER = vendor
+
+# Enable QMK Console for debugging
+# CONSOLE_ENABLE = yes
