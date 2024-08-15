@@ -505,7 +505,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        ┌──────────────────────┬────────────────────┬───────────────────────┬────────────────────┐   ┌─────┐ ┌─────┐
        │        TO0/4         │       TO1/5        │         TO2/6         │       TO3/7        │   │ F16 │ │ F17 │
        ├──────────────────────┼────────────────────┼───────────────────────┼────────────────────┤   └─────┘ └─────┘
-       │        CSGF13        │       CSGF14       │        CSGF15         │       CSGF16       │
+       │          F9          │        F10         │          F11          │        F12         │
        ├──────────────────────┼────────────────────┼───────────────────────┼────────────────────┤
        │ TD_SNAP_SHAPE_CENTER │ TD_SNAP_ARC_CENTER │ TD_SNAP_SYMBOL_ORIGIN │ TD_SNAP_GRID_POINT │      ┌─────┐
        ├──────────────────────┼────────────────────┼───────────────────────┼────────────────────┤      │ F18 │
@@ -515,7 +515,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Col: 0                         1                       2                          3                       4      */
     [_MODE_SNAP] = LAYOUT(
             _______,                  _______,                _______,                   _______,                KC_F16,
-            C(S(G(KC_F13))),          C(S(G(KC_F14))),        C(S(G(KC_F15))),           C(S(G(KC_F16))),        KC_F17,
+            KC_F9,                    KC_F10,                 KC_F11,                    KC_F12,                 KC_F17,
             TD(TD_SNAP_SHAPE_CENTER), TD(TD_SNAP_ARC_CENTER), TD(TD_SNAP_SYMBOL_ORIGIN), TD(TD_SNAP_GRID_POINT), KC_F18,
             TD(TD_SNAP_PIN),          TD(TD_SNAP_FINGER),     TD(TD_SNAP_VIA),           TD(TD_SNAP_FIGURE)
             ),
@@ -563,60 +563,60 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
         Layer 4 - 
        ┌───────┬───────┬───────┬───────┐   ┌───────┐ ┌───────┐
-       │ TO0/4 │ TO1/5 │ TO2/6 │ TO3/7 │   │ CGF13 │ │ CGF14 │
+       │ TO0/4 │ TO1/5 │ TO2/6 │ TO3/7 │   │  CF1  │ │  CF2  │
        ├───────┼───────┼───────┼───────┤   └───────┘ └───────┘
        │ AF13  │ AF14  │ AF15  │ AF16  │
        ├───────┼───────┼───────┼───────┤
        │ AF17  │ AF18  │ AF19  │ AF20  │      ┌───────┐
-       ├───────┼───────┼───────┼───────┤      │ CGF15 │
+       ├───────┼───────┼───────┼───────┤      │  CF3  │
        │ AF21  │ AF22  │ AF23  │ AF24  │      └───────┘
        └───────┴───────┴───────┴───────┘
 */
-    /* Col: 0          1          2          3          4      */
+    /* Col: 0          1          2          3          4        */
     [_FOUR] = LAYOUT(
-            _______,   _______,   _______,   _______,   C(G(KC_F13)),
-            A(KC_F13), A(KC_F14), A(KC_F15), A(KC_F16), C(G(KC_F14)),
-            A(KC_F17), A(KC_F18), A(KC_F19), A(KC_F20), C(G(KC_F15)),
+            _______,   _______,   _______,   _______,   C(KC_F3),
+            A(KC_F13), A(KC_F14), A(KC_F15), A(KC_F16), C(KC_F2),
+            A(KC_F17), A(KC_F18), A(KC_F19), A(KC_F20), C(KC_F3),
             A(KC_F21), A(KC_F22), A(KC_F23), A(KC_F24)
         ),
 
 /*
         Layer 5 - 
        ┌───────┬───────┬───────┬───────┐   ┌───────┐ ┌───────┐
-       │ TO0/4 │ TO1/5 │ TO2/6 │ TO3/7 │   │ CGF16 │ │ CGF17 │
+       │ TO0/4 │ TO1/5 │ TO2/6 │ TO3/7 │   │  CF4  │ │  CF5  │
        ├───────┼───────┼───────┼───────┤   └───────┘ └───────┘
-       │ GF13  │ GF14  │ GF15  │ GF16  │
+       │  AF1  │  AF2  │  AF3  │  AF4  │
        ├───────┼───────┼───────┼───────┤
-       │ GF17  │ GF18  │ GF19  │ GF20  │      ┌───────┐
-       ├───────┼───────┼───────┼───────┤      │ CGF18 │
-       │ GF21  │ GF22  │ GF23  │ GF24  │      └───────┘
+       │  AF5  │  AF6  │  AF7  │  AF8  │      ┌───────┐
+       ├───────┼───────┼───────┼───────┤      │  CF6  │
+       │  AF9  │ AF10  │ AF11  │ AF12  │      └───────┘
        └───────┴───────┴───────┴───────┘
 */
-    /* Col: 0          1          2          3          4      */
+    /* Col: 0         1          2          3          4        */
     [_FIVE] = LAYOUT(
-            _______,   _______,   _______,   _______,   C(G(KC_F16)),
-            G(KC_F13), G(KC_F14), G(KC_F15), G(KC_F16), C(G(KC_F17)),
-            G(KC_F17), G(KC_F18), G(KC_F19), G(KC_F20), C(G(KC_F18)),
-            G(KC_F21), G(KC_F22), G(KC_F23), G(KC_F24)
+            _______,  _______,   _______,   _______,   C(KC_F4),
+            A(KC_F1), A(KC_F2),  A(KC_F3),  A(KC_F4),  C(KC_F5),
+            A(KC_F5), A(KC_F6),  A(KC_F7),  A(KC_F8),  C(KC_F6),
+            A(KC_F9), A(KC_F10), A(KC_F11), A(KC_F12)
         ),
 
 /*
         Layer 6 - 
        ┌───────┬───────┬───────┬───────┐   ┌───────┐ ┌───────┐
-       │ TO0/4 │ TO1/5 │ TO2/6 │ TO3/7 │   │ CGF19 │ │ CGF20 │
+       │ TO0/4 │ TO1/5 │ TO2/6 │ TO3/7 │   │  CF7  │ │  CF8  │
        ├───────┼───────┼───────┼───────┤   └───────┘ └───────┘
        │ SAF13 │ SAF14 │ SAF15 │ SAF16 │
        ├───────┼───────┼───────┼───────┤
        │ SAF17 │ SAF18 │ SAF19 │ SAF20 │      ┌───────┐
-       ├───────┼───────┼───────┼───────┤      │ CGF21 │
+       ├───────┼───────┼───────┼───────┤      │  CF9  │
        │ SAF21 │ SAF22 │ SAF23 │ SAF24 │      └───────┘
        └───────┴───────┴───────┴───────┘
 */
-    /* Col: 0             1             2             3             4      */
+    /* Col: 0             1             2             3             4        */
     [_SIX] = LAYOUT(
-            _______,      _______,      _______,      _______,      C(G(KC_F19)),
-            S(A(KC_F13)), S(A(KC_F14)), S(A(KC_F15)), S(A(KC_F16)), C(G(KC_F20)),
-            S(A(KC_F17)), S(A(KC_F18)), S(A(KC_F19)), S(A(KC_F20)), C(G(KC_F21)),
+            _______,      _______,      _______,      _______,      C(KC_F7),
+            S(A(KC_F13)), S(A(KC_F14)), S(A(KC_F15)), S(A(KC_F16)), C(KC_F8),
+            S(A(KC_F17)), S(A(KC_F18)), S(A(KC_F19)), S(A(KC_F20)), C(KC_F9),
             S(A(KC_F21)), S(A(KC_F22)), S(A(KC_F23)), S(A(KC_F24))
         ),
 
@@ -651,13 +651,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_VISIBILITY] = { ENCODER_CCW_CW(S(KC_F13), C(KC_F13)), ENCODER_CCW_CW(S(KC_F14), C(KC_F14)), ENCODER_CCW_CW(S(KC_F15), C(KC_F15)) },
-    [_MODE_SNAP] = { ENCODER_CCW_CW(S(KC_F16), C(KC_F16)), ENCODER_CCW_CW(S(KC_F17), C(KC_F17)), ENCODER_CCW_CW(S(KC_F18), C(KC_F18)) },
-    [_FIND1] = { ENCODER_CCW_CW(S(KC_F19), C(KC_F19)), ENCODER_CCW_CW(S(KC_F20), C(KC_F20)), ENCODER_CCW_CW(S(KC_F21), C(KC_F21)) },
-    [_FIND2] = { ENCODER_CCW_CW(S(KC_F22), C(KC_F22)), ENCODER_CCW_CW(S(KC_F23), C(KC_F23)), ENCODER_CCW_CW(S(KC_F24), C(KC_F24)) },
-    [_FOUR] = { ENCODER_CCW_CW(S(G(KC_F13)), A(G(KC_F13))), ENCODER_CCW_CW(S(G(KC_F14)), A(G(KC_F14))), ENCODER_CCW_CW(S(G(KC_F15)), A(G(KC_F15))) },
-    [_FIVE] = { ENCODER_CCW_CW(S(G(KC_F16)), A(G(KC_F16))), ENCODER_CCW_CW(S(G(KC_F17)), A(G(KC_F17))), ENCODER_CCW_CW(S(G(KC_F18)), A(G(KC_F18))) },
-    [_SIX] = { ENCODER_CCW_CW(S(G(KC_F19)), A(G(KC_F19))), ENCODER_CCW_CW(S(G(KC_F20)), A(G(KC_F20))), ENCODER_CCW_CW(S(G(KC_F21)), A(G(KC_F21))) },
-    [_RGB] = { ENCODER_CCW_CW(RGB_HUD, RGB_HUI), ENCODER_CCW_CW(RGB_SAD, RGB_SAI), ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
+    [_VISIBILITY] = { ENCODER_CCW_CW(S(KC_F13), C(KC_F13)), ENCODER_CCW_CW(S(KC_F14), C(KC_F14)),
+                        ENCODER_CCW_CW(S(KC_F15), C(KC_F15)) },
+    [_MODE_SNAP] = { ENCODER_CCW_CW(S(KC_F16), C(KC_F16)), ENCODER_CCW_CW(S(KC_F17), C(KC_F17)),
+                        ENCODER_CCW_CW(S(KC_F18), C(KC_F18)) },
+    [_FIND1] = { ENCODER_CCW_CW(S(KC_F19), C(KC_F19)), ENCODER_CCW_CW(S(KC_F20), C(KC_F20)),
+                        ENCODER_CCW_CW(S(KC_F21), C(KC_F21)) },
+    [_FIND2] = { ENCODER_CCW_CW(S(KC_F22), C(KC_F22)), ENCODER_CCW_CW(S(KC_F23), C(KC_F23)),
+                        ENCODER_CCW_CW(S(KC_F24), C(KC_F24)) },
+    [_FOUR] = { ENCODER_CCW_CW(C(S(KC_F1)), C(A(KC_F1))), ENCODER_CCW_CW(C(S(KC_F2)), C(A(KC_F2))),
+                        ENCODER_CCW_CW(C(S(KC_F3)), C(A(KC_F3))) },
+    [_FIVE] = { ENCODER_CCW_CW(C(S(KC_F4)), C(A(KC_F4))), ENCODER_CCW_CW(C(S(KC_F5)), C(A(KC_F5))),
+                        ENCODER_CCW_CW(C(S(KC_F6)), C(A(KC_F6))) },
+    [_SIX] = { ENCODER_CCW_CW(C(S(KC_F7)), C(A(KC_F7))), ENCODER_CCW_CW(C(S(KC_F8)), C(A(KC_F8))),
+                        ENCODER_CCW_CW(C(S(KC_F9)), C(A(KC_F9))) },
+    [_RGB] = { ENCODER_CCW_CW(RGB_HUD, RGB_HUI), ENCODER_CCW_CW(RGB_SAD, RGB_SAI),
+                        ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
 };
 #endif

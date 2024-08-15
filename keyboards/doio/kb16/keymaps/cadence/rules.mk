@@ -1,5 +1,5 @@
 # Online configurators enabled
-VIA_ENABLE = yes	# unsure if both can be enabled simultaneously, or if VIA has to be enabled for VIAL; thompson-vii (GitHub) firmware used as reference has both
+# VIA_ENABLE = yes	# unsure if both can be enabled simultaneously, or if VIA has to be enabled for VIAL; thompson-vii (GitHub) firmware used as reference has both
 VIAL_ENABLE = yes
 
 # Link Time Optimization; takes longer to compile, but helps achieve smallest firmware size
